@@ -89,7 +89,7 @@ func (s *radixSorter) Sort() (sortedStrs []string) {
 	var wg sync.WaitGroup
 
 	for char, strs := range s.buckets {
-		if len(strs.arr) > 1 {
+		if char != '\x00' && len(strs.arr) > 1 {
 			wg.Add(1)
 			go func(outterSorter *radixSorter, char byte, wg *sync.WaitGroup) {
 				innerSorter := NewRadixSorter()
